@@ -1,0 +1,23 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: AzureResourceManagerTemplateDeployment@3
+  inputs:
+    deploymentScope: 'Subscription'
+    azureResourceManagerConnection: 'Silvertrain IT Management Group connection'
+    subscriptionId: '8385ebe8-4053-4388-a64e-0fb404806a33'
+    location: 'UK South'
+    templateLocation: 'Linked artifact'
+    csmFile: 'azurerg.json'
+    csmParametersFile: 'azurerg.parameter.json'
+    deploymentMode: 'Incremental'
+    deploymentName: 'Create_ResourceGroup'
